@@ -4,6 +4,8 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 import requests
 from bs4 import BeautifulSoup
+import xlwt
+import lxml
 
 
 def header(referer):
