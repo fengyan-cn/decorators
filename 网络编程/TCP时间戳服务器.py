@@ -1,5 +1,5 @@
 from socket import *
-from time import ctime
+import time
 
 HOST = ''
 PORT = 21567
@@ -17,10 +17,12 @@ while True:
 
     while True:
         data = tcpCliSock.recv(BUFSIZ)
-        data = str.decode(data)
+        data = data.decode('utf-8')
         if not data:
             break
-        tcpCliSock.send('[%s] %s' %(str.encode(ctime()), str.encode(data)))
+        timenow = time.ctime()
+        output = '[%s]:%s' %(timenow, data)
+        tcpCliSock.send(output.encode('utf-8'))
 
     tcpCliSock.close()
 print('我这个服务器要关闭了，但是我按道理应该是永远不关闭的')
