@@ -1,5 +1,5 @@
 from socket import *
-from time import ctime
+import time
 
 HOST = ''
 PORT = 21567
@@ -12,7 +12,10 @@ udpSerSock.bind(ADDR)
 while True:
     print('waiting for message...')
     data, addr = udpSerSock.recvfrom(BUFSIZ)
-    udpSerSock.sendto('[%s] %s' % (ctime(), data), addr)
+    data = data.decode('utf-8')
+    timenow = time.ctime()
+    output = '[%s] %s' % (timenow, data)
+    udpSerSock.sendto(output.encode('utf-8'), addr)
     print('...received from and returned to:', addr)
 
 udpSerSock.close()
